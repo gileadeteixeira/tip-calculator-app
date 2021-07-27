@@ -1,0 +1,207 @@
+@import url('https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&display=swap');
+
+@media only screen and (min-width: 375px){
+    body{
+        background-color: #c5e4e7;
+        font-family: 'Space Mono', monospace;
+        font-weight: 400;
+        font-size: 13px;
+    }
+    .logo{
+        display: flex;
+        flex: 1;
+        align-items: center;
+        justify-content: center;
+        margin: 40px;
+    }
+    .container, html, body {
+        height: 100%;
+        margin: 0;
+    }
+    .container{
+        display: flex;
+        flex-flow: row wrap;
+        align-items: flex-start;
+        justify-content: center;
+        background-color: #ffffff;
+        border-top-left-radius: 20px;
+        border-top-right-radius: 20px;
+        flex: 1;
+    }
+    .contentArea{
+        display: flex;
+        flex-direction: column;
+        padding: 30px;
+    }
+    .inputArea, .tipsArea{
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        justify-content: center;
+        width: 100%;
+        font-weight: 700;
+        color: #00494d;
+        margin-bottom: 25px;
+    }
+    .inputArea .label{
+        display: flex;
+        width: 100%;
+        align-items: center;
+        justify-content: space-between;
+    }
+    .contentArea .label p{
+        margin: 0px;
+    }
+    .inputArea .label .warningMsg{
+        color: #c02626;
+    }
+    .inputArea .inputField{
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+        width: 100%;
+        background-color: #f4fafa;
+        font-size: 12px;
+        border-radius: 5px;
+        margin-top: 5px;
+    }
+    .inputArea .inputField:hover{
+        border: solid #26c0ab 2px;
+    }
+    .inputArea .inputField.warning{
+        border: solid #c02626 2px;
+    }
+    .inputField .icon #icon-dollar{
+        display: flex;
+        height: 15px;
+        width: 9px;
+        margin-left: 15px;
+        margin-right: 15px;
+    }
+    .inputField .input{
+        display: flex;
+        width: 100%;
+        border: none;
+        text-align: end;
+        background-color: #f4fafa;
+        font-family: 'Space Mono', monospace;
+        font-weight: 700;
+        font-size: 24px;
+        margin-right: 15px;
+        color: #00494d;
+    }
+    .inputField .input[placeholder]{
+        opacity: 50%;
+    }
+    .tipsArea .tipBox{
+        display: flex;
+        flex-flow: row wrap;
+        width: 100%;
+        justify-content: space-between;
+        margin-top: 6px;
+    }
+    .btnTip{
+        font-family: 'Space Mono', monospace;
+        font-weight: 700;
+        color: #ffffff;
+        font-size: 24px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        border: none;
+        background-color: #00494d;
+        border-radius: 5px;
+        width: 145px;
+        padding: 6px;
+        margin: 6px;
+    }
+    #btnTip5{
+        width: 130px;
+        color: #00494d;
+        background-color: #f4fafa;
+        text-align: end;
+    }
+    #btnTip5:hover{
+        border: solid #26c0ab 2px;
+    }
+    .btnTip.selected{
+        background-color: #26c0ab;
+        color: #00494d;
+    }
+    .inputField .icon #icon-person{
+        display: flex;
+        height: 15px;
+        width: 12px;
+        margin-left: 15px;
+        margin-right: 15px;
+    }
+    .darkArea{
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        background-color: #00494d;
+        color: #ffffff;
+        width: 100%;
+        border-radius: 15px;
+        padding-top: 10px;
+    }
+    .darkArea .box{
+        padding: 20px;
+    }
+    .darkArea .amountArea, .darkArea .totalArea{
+        display: flex;
+        justify-content: space-between;
+        margin-top: 10px;
+        margin-bottom: 10px;
+    }
+    .darkArea .totalArea{
+        margin-top: 20px;
+    }
+    .txtFinal {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+    }
+    .txtFinal p{
+        margin: 0;
+    }
+    .txtFinal .person{
+        color: #7f9c9f;
+    }
+    .price{
+        font-size: 24px;
+        color: #26c0ab;
+        font-weight: 700;
+        margin: 0;
+    }
+    .darkArea .btnResetArea{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+    #btnReset{
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 100%;
+        margin-top: 15px;
+        background-color: #26c0ab;
+        border: none;
+        font-family: 'Space Mono', monospace;
+        font-weight: 700;
+        font-size: 20px;
+        color: #00494d;
+        padding-top: 10px;
+        padding-bottom: 10px;
+        border-radius: 5px;
+    }
+}
+@media only screen and (min-width: 1025px){
+    .btnTip:hover, #btnReset:hover{
+        background-color: #94e6ee;
+        color: #00494d;
+    }
+    .inputField.warning:hover{
+        border-color: #26c0ab;
+    }
+}

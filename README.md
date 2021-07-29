@@ -18,12 +18,14 @@ This is a solution to the <a href="https://www.frontendmentor.io/challenges/tip-
 ## Overview
 
 ### Screenshots
+<div>
 <a href="https://user-images.githubusercontent.com/77688036/127518374-bf214045-9876-46fd-9a93-905a10ec661e.png" target="_blank" >
   <img height="450px" src="https://user-images.githubusercontent.com/77688036/127518374-bf214045-9876-46fd-9a93-905a10ec661e.png" alt="mobile_sreenshot">
 </a>
 <a href="https://user-images.githubusercontent.com/77688036/127518540-6bbd5ad0-35b4-41e7-a7d7-5460c4ca7f02.png" target="_blank" >
   <img height="450px" src="https://user-images.githubusercontent.com/77688036/127518540-6bbd5ad0-35b4-41e7-a7d7-5460c4ca7f02.png" alt="desktop_sreenshot">
 </a>
+</div>
 
 ### Links
 

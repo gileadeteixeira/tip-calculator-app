@@ -27,8 +27,8 @@ This is a solution to the <a href="https://www.frontendmentor.io/challenges/tip-
 
 ### Links
 
-- Solution URL: <a href="http://" target="_blank" >Add solution URL here</a>
-- Live Site URL: <a href="http://" target="_blank" >Add live site URL here</a>
+- Solution URL: <a href="https://www.frontendmentor.io/solutions/responsive-site-using-html-css-and-javascript-4MKsWRyNw" target="_blank" >My Solution</a>
+- Live Site URL: <a href="https://gileadeteixeira.github.io/tip-calculator-app/" target="_blank" >Splitter</a>
 
 ## My process
 

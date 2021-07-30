@@ -1,6 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&display=swap');
 
-@media only screen and (min-width: 375px){
+@media only screen and (min-width: 280px){
     .container, html, .area {
         height: 100%;
         margin: 0;
@@ -34,11 +34,13 @@
         border-top-left-radius: 20px;
         border-top-right-radius: 20px;
         flex: 1;
+        width: 100%;
     }
     .contentArea{
         display: flex;
         flex-direction: column;
         padding: 30px;
+        width: 100%;
     }
     .inputArea, .tipsArea{
         display: flex;
@@ -51,13 +53,11 @@
         margin-bottom: 25px;
     }
     .label{
-        display: flex;
         width: 100%;
-        align-items: center;
-        justify-content: space-between;
     }
     .contentArea .label p{
         margin: 0px;
+        text-align: center;
     }
     input::-webkit-outer-spin-button,input::-webkit-inner-spin-button {
         -webkit-appearance: none;
@@ -72,9 +72,9 @@
     }
     .inputArea .inputField{
         display: flex;
+        width: 100%;
         justify-content: space-around;
         align-items: center;
-        width: 100%;
         background-color: #f4fafa;
         font-size: 12px;
         border-radius: 5px;
@@ -181,10 +181,7 @@
         padding: 20px;
     }
     .darkArea .amountArea, .darkArea .totalArea{
-        display: flex;
-        justify-content: space-between;
-        margin-top: 10px;
-        margin-bottom: 10px;
+        text-align: center;
     }
     .darkArea .totalArea{
         margin-top: 20px;
@@ -232,7 +229,24 @@
         background-color: #94e6ee;
     }
 }
-@media only screen and (min-width: 1000px){
+@media only screen and (min-width: 375px){
+    .label{
+        display: flex;
+        width: 100%;
+        align-items: center;
+        justify-content: space-between;
+    }
+    .contentArea .label p{
+        margin: 0px;
+    }
+    .darkArea .amountArea, .darkArea .totalArea{
+        display: flex;
+        justify-content: space-between;
+        margin-top: 10px;
+        margin-bottom: 10px;
+    }
+}
+@media only screen and (min-width: 768px){
     .body{
         margin: auto;
     }

@@ -2,12 +2,15 @@ const inputBill = document.querySelector('#inputBill');
 const inputPeople = document.querySelector('#inputPeople');
 const amountPrice = document.querySelector('#amountPrice');
 const totalPrice = document.querySelector('#totalPrice');
+const area2 = document.querySelector('.area2');
 const btnReset = document.querySelector('#btnReset');
 const btnTips = document.querySelectorAll('.btnTip');
 const labels = document.querySelectorAll('.label');//Text area where the warning message will be. I selected all of then if I wanted to add warning messages to the other labels eventually.
 const inputFields = document.querySelectorAll('.inputField');//div area that will have the red border. I selected all of then if I wanted to add warning styles to the other divs eventually.
 
 const commaRegex = /(\d)(?=(\d{3})+(?!\d))/g; //1000.00 => 1,000.00 for example
+
+const decimalsRegex = /(\,|\.)\d{3,}/g; //12.123 => 12.12 for example
 
 const warningVerification = (warningMsg)=>{
     //If the People label area not contains the warning <p>, add it.   
@@ -21,13 +24,13 @@ const warningVerification = (warningMsg)=>{
 };
 
 let price = {
-    bill: 0,
-    tipAmount: 0,
-    tip: 0,
-    total: 0
+    bill: -1,
+    tipAmount: -1,
+    tip: -1,
+    total: -1
 }
 
-let people = 0;
+let people = -1;
 
 let optionSelected = -1; //Transformed id of selected button Tip . Starts with -1 and change
 
@@ -36,11 +39,11 @@ const resetOptionSelected = ()=>{
 };
 
 const resetData = ()=>{//Reset prices an people values
-    price.bill = 0;
-    price.tipAmount = 0;
-    price.tip = 0;
-    price.total = 0;
-    people = 0;
+    price.bill = -1;
+    price.tipAmount = -1;
+    price.tip = -1;
+    price.total = -1;
+    people = -1;
 };
 
 const resetQuery = ()=>{//Reset props of elements
@@ -69,12 +72,13 @@ const resetAll = ()=>{
 };
 
 const checkData = ()=>{//Boolean to set button activation
-    if (price.bill != 0 || price.tipAmount != 0 || price.tip != 0 || price.total != 0 || optionSelected != -1 || people != 0) return true;
+    if (price.bill >= 0 || price.tipAmount >= 0 || price.tip >= 0 || price.total >= 0 || people > 0) return true;
 };
 
 const activateBtnReset = ()=>{
     btnReset.className = "btnReset active";
     btnReset.addEventListener('click', event => resetAll(event));
+    //console.log(price.bill, price.tipAmount, price.tip, price.total, optionSelected, people)
 };
 
 const disableBtnReset = ()=>{
@@ -124,27 +128,38 @@ const setTip = (tipSelected, value=0)=>{
     //console.log(typeof(price.tip));
 };
 
+const resetTip = ()=>{//If user selects custom, reset tipAmount
+    price.tip = -1;
+    price.tipAmount = -1;
+    optionSelected = -1;
+    amountPrice.innerHTML = `$0.00`;
+}
+
 const setTipAmount = ()=>{
-    price.tipAmount = ((price.bill*price.tip)/100)/people;
-    if(!isNaN(price.tipAmount) && isFinite(price.tipAmount)){//prevents NaN and Infinity strings from being displayed
+    if (people > 0 && price.tip >= 0 && price.bill >= 0) {
+        price.tipAmount = ((price.bill*price.tip)/100)/people;
+        //console.log(typeof(price.total));
         amountPrice.innerHTML = `$${price.tipAmount.toFixed(2)}`;
         amountPrice.innerHTML = amountPrice.innerHTML.replace(commaRegex, "$1,");//6000.00 => 6,000.00 for example; In this example, the $1 refers to number 6, So add a comma after
-    } else {
+    } else {//prevents NaN and Infinity strings from being displayed
         amountPrice.innerHTML = `$0.00`;
     }
     //console.log(price.tipAmount);
 };
 
 const setTotal = ()=>{
-    if (people != 0 && price.tip !=0) {
+    if (people > 0 && price.tip >= 0 && price.bill >= 0) {
         price.total = (((price.bill*price.tip)/100)+price.bill)/people;
         //console.log(typeof(price.total));
-    } else {
+    } else if(people > 0 && price.tip == -1 && price.bill > 0){
+        price.total = price.bill/people;
+        //console.log(typeof(price.total));
+    } else if (price.bill >= 0){
         price.total = price.bill;
         //console.log(typeof(price.total));
     };
 
-    if(!isNaN(price.total) && isFinite(price.total)){//prevents NaN and Infinity strings from being displayed
+    if(price.total > -1){//prevents NaN and Infinity strings from being displayed
         totalPrice.innerHTML = `$${price.total.toFixed(2)}`;
         totalPrice.innerHTML = totalPrice.innerHTML.replace(commaRegex, "$1,");//7000.00 => 7,000.00 for example; In this example, the $1 refers to number 7, So add a comma after
 
@@ -154,9 +169,14 @@ const setTotal = ()=>{
     //console.log(price.total);
 };
 
+const resetTotal = ()=>{
+    price.bill = -1;
+    price.total = -1;
+    totalPrice.innerHTML = `$0.00`;
+}
+
 const hasComma = (event)=>{
     return event.target.value.match(/\,|\./) ? true : false;
-    //return value.match(/\,|\./) ? 5 : 3;
 };
 
 const replaceComma = (event, end)=>{// When 
@@ -168,7 +188,14 @@ const replaceComma = (event, end)=>{// When
         //console.log(pop);
     }
     return pop;
-}
+};
+
+const fixDecimals = (event) =>{
+    if(event.target.value.match(decimalsRegex)){
+        //console.log('yes')
+        event.target.value = Number(event.target.value).toFixed(2);
+    }
+};
 
 inputBill.addEventListener('keyup', event=>{
     //Changes bill value as the user types
@@ -181,19 +208,20 @@ inputBill.addEventListener('keyup', event=>{
     let length = event.target.value.length;//Current length
     if (keyCode == 189 || keyCode == 109) {// - (Minus) or - (NumPadSubtract)
         event.target.value = '';//if the user types -  the input value will reset
-    };            
+    } else if (event.target.value == ''){
+        //console.log('hello')
+        resetTotal();
+    } 
     const setBill = (maxLength)=>{
         if (length>maxLength) {// 999999 (length = 6) or 999,999.00 (length = 9)
             let string = replaceComma(event, maxLength);
             //console.log(string)                
             event.target.value = string;            
         } else if(number>=min && number<max){
-            //console.log('yes')
+            //console.log('yes');
+            fixDecimals(event);
             price.bill = number;
-            setTipAmount();
-            setTotal();
-            checkReset();            
-            if (people == 0) {
+            if (people <= 0) {
                 warningVerification(warningMsg);
             };
         } else if(number>=max){
@@ -208,6 +236,10 @@ inputBill.addEventListener('keyup', event=>{
     else{
         setBill(6);
     }
+    setTipAmount();
+    setTotal();            
+    checkReset();
+    console.log(area2.clientWidth)
 });
 
 inputPeople.addEventListener('keyup', event=>{
@@ -224,10 +256,13 @@ inputPeople.addEventListener('keyup', event=>{
     } else if(keyCode == 188 || keyCode == 190){// , (Comma) or . (Dot/Period)
         event.target.value = event.target.value.slice(0, -1);//Commas or periods/dots are not allowed, so erase then; Input value resets immediately
     } else if(isNaN(number)|| number == 0) {
-        //if the user enters or re-enters 0, the warning display is triggered
+        //if the user enters or re-enters 0, or leave empty , the warning display is triggered
         warningVerification(warningMsg);
         event.target.value = isNaN(number) ? '' : '0';
-    };
+        if (event.target.value == '') {
+            people = -1;
+        }
+    }
     const setPeople = (maxLength)=>{
         if (length>maxLength) {// 999999 (length = 6)
             let string = replaceComma(event, maxLength);
@@ -236,9 +271,6 @@ inputPeople.addEventListener('keyup', event=>{
         } else if(number>min && number<max){
             //console.log('yes')
             people = number;
-            setTipAmount();
-            setTotal();
-            checkReset();            
             if (number != 0 && labels[2].contains(warningMsg)) {
                 labels[2].removeChild(warningMsg);
                 inputFields[1].className = 'inputField';
@@ -249,15 +281,19 @@ inputPeople.addEventListener('keyup', event=>{
         }
     }
     setPeople(6);
+    setTipAmount();
+    setTotal();          
+    checkReset();
 });
 
 inputPeople.addEventListener('focus', event=>{
     //if the number of people is the first value the user wants to enter
     event.preventDefault();
     const warningMsg = document.querySelector('.warningMsg');
-    if (Number(event.target.value) == 0) {
+    if (Number(event.target.value) == 0 || event.target.value == '') {
         warningVerification(warningMsg);
-    };
+    }
+    checkReset();
 });
 
 btnTips.forEach(button=>{
@@ -269,8 +305,10 @@ btnTips.forEach(button=>{
             if (optionSelected == idSelected) {
                 //if the user selects the same button, deselect it
                 event.target.className = 'btnTip';
+                resetTip();
                 resetOptionSelected();
             } else {
+                resetTip();
                 btnTips.forEach(btn=>{
                     btn.className = 'btnTip';
                     if(btn.id == 'btnTip5'){
@@ -284,15 +322,20 @@ btnTips.forEach(button=>{
                 const tipSelected = idSelected;
                 setTip(tipSelected);
                 setTipAmount();
-                setTotal();
-                checkReset();
                 //console.log(tipSelected);                
             }
+            setTotal();
+            checkReset();
         });
     } else {
         button.addEventListener('focus', event=>{
             //Focus on input
             event.preventDefault();
+            if (Number(amountPrice.innerHTML) != Number(event.target.value)) {//When Custom is selected, it resets only if the values are different (if the user enters a value, blurs the custom, and focuses it again, the value will not be reset)
+                //console.log('yes')
+                resetTip();
+                setTotal();
+            }
             btnTips.forEach(btn=>{
                 //Deselect other buttons
                 btn.className = 'btnTip';
@@ -301,6 +344,17 @@ btnTips.forEach(button=>{
             const idSelected = Number(event.target.id.toString().replace('btnTip', ''));
             optionSelected = idSelected;
             //console.log(Number(event.target.value));
+            checkReset();
+        });
+
+        button.addEventListener('blur', event=>{
+            //Focus on input
+            event.preventDefault();
+            if (event.target.value == '') {//When Custom is selected, it resets only if the values are different (if the user enters a value, blurs the custom, and focuses it again, the value will not be reset)
+                //console.log('yes')
+                resetTip();
+                checkReset();
+            }
         });
 
         button.addEventListener('keyup', event=>{
@@ -315,18 +369,20 @@ btnTips.forEach(button=>{
             let length = event.target.value.length;//Current length
             if (keyCode == 189 || keyCode == 109) {// - (Minus) or - (NumPadSubtract)
                 event.target.value = '';//if the user types -  the input value will reset
-            };            
+            } else if (event.target.value == ''){
+                //console.log('hello')
+                resetTip();
+            }         
             const customTip = (maxLength)=>{
                 if (length>maxLength) {// 100 (length = 3) or 100.00 (length = 5)
                     let string = replaceComma(event, maxLength);
                     //console.log(string)                
                     event.target.value = string;
                 } else if(number>=min && number<=max){
-                    //console.log('yes')
+                    //console.log('yes');
+                    fixDecimals(event);
                     setTip(tipSelected, number);
                     setTipAmount();
-                    setTotal();
-                    checkReset();
                     //console.log(number);
                 } else if(number>max){
                     //console.log(number)
@@ -340,6 +396,8 @@ btnTips.forEach(button=>{
             else{
                 customTip(3);
             }
+            setTotal();
+            checkReset();
         });
     }
 });

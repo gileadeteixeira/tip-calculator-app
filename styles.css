@@ -242,6 +242,7 @@
     .darkArea .amountArea, .darkArea .totalArea{
         display: flex;
         justify-content: space-between;
+        text-align: start;
         margin-top: 10px;
         margin-bottom: 10px;
     }

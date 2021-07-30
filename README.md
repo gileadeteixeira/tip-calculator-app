@@ -29,6 +29,9 @@ This is a solution to the <a href="https://www.frontendmentor.io/challenges/tip-
 - Solution URL: <a href="https://www.frontendmentor.io/solutions/responsive-site-using-html-css-and-javascript-KItbwMQlV" target="_blank" >My Solution</a>
 - Live Site URL: <a href="https://gileadeteixeira.github.io/tip-calculator-app/" target="_blank" >Splitter</a>
 
+<a href="https://gileadeteixeira.github.io/tip-calculator-app/" target="_blank" ><img width="300px" align="center" src="https://user-images.githubusercontent.com/77688036/127581015-979d464a-798c-4198-b5e7-e7ccf4e86849.png" alt="qr_code_splitter"></a> **Click or tap or point the camera**
+
+
 ## My process
 
 ### Built with
@@ -89,6 +92,7 @@ I want to learn more about **HTML DOM Events**, and improve the creation of **Re
 ## Author
 
 - Frontend Mentor - <a href="https://www.frontendmentor.io/profile/gileadeteixeira" target="_blank" >@gileadeteixeira</a>
+- Twitter - <a href="https://twitter.com/giltxra" target="_blank" >@giltxra</a>
 - LinkedIn - <a href="https://www.linkedin.com/in/gileade-teixeira-b86935204/" target="_blank" >@gileade-teixeira</a>
 
 ## Extras

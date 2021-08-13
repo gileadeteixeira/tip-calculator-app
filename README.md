@@ -29,7 +29,7 @@ This is a solution to the <a href="https://www.frontendmentor.io/challenges/tip-
 - Solution URL: <a href="https://www.frontendmentor.io/solutions/responsive-site-using-html-css-and-javascript-KItbwMQlV" target="_blank" >My Solution</a>
 - Live Site URL: <a href="https://gileadeteixeira.github.io/tip-calculator-app/" target="_blank" >Splitter</a>
 
-<a href="https://gileadeteixeira.github.io/tip-calculator-app/" target="_blank" ><img width="300px" align="center" src="https://user-images.githubusercontent.com/77688036/127581015-979d464a-798c-4198-b5e7-e7ccf4e86849.png" alt="qr_code_splitter"></a> **Click or tap or point the camera**
+<a href="https://gileadeteixeira.github.io/tip-calculator-app/" target="_blank" ><img width="200px" align="center" src="https://user-images.githubusercontent.com/77688036/129354594-8965bd5d-3f10-4a5d-91d6-2a3b448a2168.png" alt="qr_code_splitter"></a> **Click, tap or point the camera**
 
 
 ## My process
